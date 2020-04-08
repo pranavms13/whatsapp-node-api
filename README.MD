@@ -1,13 +1,13 @@
 # whatsapp-node-api
 
-### A simple NodeJS Wrapper for [whatsapp-web.js by pedroslopez]([https://github.com/pedroslopez/whatsapp-web.js](https://github.com/pedroslopez/whatsapp-web.js))
+### A simple NodeJS Wrapper for [whatsapp-web.js by pedroslopez](https://github.com/pedroslopez/whatsapp-web.js)
 
  •  [Technologies Used](https://github.com/pranavms13/whatsapp-node-api#technologies)  •  [Why?](https://github.com/pranavms13/whatsapp-node-api#why)  •  [Goals](https://github.com/pranavms13/whatsapp-node-api#goals)  •  [FAQ](https://github.com/pranavms13/whatsapp-node-api#faq)
 
 ## [](https://github.com/pranavms13/whatsapp-node-api#technologies)💻  Technologies
 
 -   [NodeJS](https://nodejs.org/en/)
--   [whatsapp-web.js]([https://github.com/pedroslopez/whatsapp-web.js](https://github.com/pedroslopez/whatsapp-web.js))
+-   [whatsapp-web.js](https://github.com/pedroslopez/whatsapp-web.js)
 	-  [puppeteer](https://github.com/GoogleChrome/puppeteer)
 
 ## [](https://github.com/pranavms13/whatsapp-node-api#why)Why?
@@ -34,10 +34,10 @@ If you think whatsapp-node-api delivers these, let me know by putting a star ⭐
     
 -   **What npm modules did you use?**
     
-    -   [express]([https://github.com/expressjs/express](https://github.com/expressjs/express))  for API Server
-    -   [body-parser]([https://github.com/expressjs/body-parser](https://github.com/expressjs/body-parser))  Node.js body parser middleware
-    -   [fs]([https://www.npmjs.com/package/fs](https://www.npmjs.com/package/fs))  To read session.json
-    -   [whatsapp-web.js]([https://github.com/pedroslopez/whatsapp-web.js](https://github.com/pedroslopez/whatsapp-web.js))  A WhatsApp API client that connects through the WhatsApp Web browser app
+    -   [express](https://github.com/expressjs/express)  for API Server
+    -   [body-parser](https://github.com/expressjs/body-parser)  Node.js body parser middleware
+    -   [fs](https://www.npmjs.com/package/fs)  To read session.json
+    -   [whatsapp-web.js](https://github.com/pedroslopez/whatsapp-web.js)  A WhatsApp API client that connects through the WhatsApp Web browser app
 
     
 -   **How do I contact you?**
@@ -62,7 +62,7 @@ This code is in no way affiliated with, authorized, maintained, sponsored or end
 
 You can support the maintainer of this project through donation :
 
-[![Support via PayPal](https://camo.githubusercontent.com/19fc947af2adcacd24b6cdbd4a33c10d7cbaeb6c/68747470733a2f2f63646e2e7261776769742e636f6d2f74776f6c66736f6e2f70617970616c2d6769746875622d627574746f6e2f312e302e302f646973742f627574746f6e2e737667)](https://www.paypal.me/pranavms1/) **or**  <kbd><a  href="upi://pay?pa=pranavms@dbs&pn=pranavms"><img  src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/UPI-Logo-vector.svg/1200px-UPI-Logo-vector.svg.png"  width="100"  height="45"/></a></kbd>
+[![Support via PayPal](https://camo.githubusercontent.com/19fc947af2adcacd24b6cdbd4a33c10d7cbaeb6c/68747470733a2f2f63646e2e7261776769742e636f6d2f74776f6c66736f6e2f70617970616c2d6769746875622d627574746f6e2f312e302e302f646973742f627574746f6e2e737667)](https://www.paypal.me/pranavms1/) **or**  <kbd><a  href="upi://pay?pa=pranavms@dbs&pn=pranavms">UPI Donate</a></kbd>
 
 ## [](https://github.com/pranavms13/whatsapp-node-api#contact-me)👋  Contact Me  👋
 
