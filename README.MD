@@ -62,7 +62,7 @@ This code is in no way affiliated with, authorized, maintained, sponsored or end
 
 You can support the maintainer of this project through donation :
 
-[![Support via PayPal](https://camo.githubusercontent.com/19fc947af2adcacd24b6cdbd4a33c10d7cbaeb6c/68747470733a2f2f63646e2e7261776769742e636f6d2f74776f6c66736f6e2f70617970616c2d6769746875622d627574746f6e2f312e302e302f646973742f627574746f6e2e737667)](https://www.paypal.me/pranavms1/) **or**  <kbd><a  href="upi://pay?pa=pranavms@dbs&pn=pranavms">UPI Donate</a></kbd>
+[![Support via PayPal](https://camo.githubusercontent.com/19fc947af2adcacd24b6cdbd4a33c10d7cbaeb6c/68747470733a2f2f63646e2e7261776769742e636f6d2f74776f6c66736f6e2f70617970616c2d6769746875622d627574746f6e2f312e302e302f646973742f627574746f6e2e737667)](https://www.paypal.me/pranavms1/) **or**  <kbd>[UPI Donate](upi://pay?pa=pranavms@dbs&pn=pranavms)</kbd>
 
 ## [](https://github.com/pranavms13/whatsapp-node-api#contact-me)👋  Contact Me  👋
 
