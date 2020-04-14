@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require('fs');
 const { Client } = require('whatsapp-web.js');
+// const wwjs = require('whatsapp-web.js');
 const SESSION_FILE_PATH = './session.json';
 let sessionCfg;
 if (fs.existsSync(SESSION_FILE_PATH)) {
@@ -9,6 +10,7 @@ if (fs.existsSync(SESSION_FILE_PATH)) {
 }
 global.client = new Client({ puppeteer: { headless: true , args:['--no-sandbox','--disable-setuid-sandbox','--unhandled-rejections=strict'] }, session: sessionCfg});
 const app = express();
+
 
 const port = process.env.PORT || 5000;
 app.use(express.json());
@@ -20,7 +22,7 @@ client.on('qr', qr => {
 
 
 client.on('authenticated', (session) => {
-    console.log("AUTH!", session);
+    console.log("AUTH!");
     sessionCfg = session;
     fs.writeFile(SESSION_FILE_PATH, JSON.stringify(session), function(err) {
         if (err) {
@@ -41,9 +43,15 @@ client.initialize();
 
 const chatRoute = require('./components/chatting');
 const authRoute = require('./components/auth');
+const contactRoute = require('./components/contact');
 
+app.use(function(req,res,next){
+    console.log(req.method + ' : ' + req.path);
+    next();
+});
 app.use('/chat',chatRoute);
 app.use('/auth',authRoute);
+app.use('/contact',contactRoute);
 
 app.listen(port, () => {
     console.log("Server Running Live on Port : " + port);

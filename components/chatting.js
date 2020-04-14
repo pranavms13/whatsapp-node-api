@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
-router.post('/sendmessage', async (req,res) => {
-    let phone = req.body.phone;
+router.post('/sendmessage/:phone', async (req,res) => {
+    let phone = req.params.phone;
     let message = req.body.message;
 
     if(phone==undefined||message==undefined){
@@ -15,17 +15,26 @@ router.post('/sendmessage', async (req,res) => {
     }
 });
 
-router.get('/getchatbyid', async (req,res) => {
-    let phone = req.body.phone;
+router.get('/getchatbyid/:phone', async (req,res) => {
+    let phone = req.params.phone;
     if(phone==undefined){
         res.send({status:"error",message:"please enter valid phone number"});
     }else{
         client.getChatById(phone+"@c.us").then((chat) => {
-            res.end({ status:"success", message: "Returned chat!", data: JSON.stringify(chat)});
+            res.send({ status:"success", message: chat});
         }).catch(() => {
             console.error("getchaterror")
-            res.end({status:"error",message:"getchaterror"})
+            res.send({status:"error",message:"getchaterror"})
         })
     }
 });
+
+router.get('/getchats', async (req,res) => {
+    client.getChats().then((chats) => {
+        res.send({ status:"success", message: chats});
+    }).catch(() => {
+        res.send({status:"error",message:"getchatserror"})
+    })
+});
+
 module.exports = router;
