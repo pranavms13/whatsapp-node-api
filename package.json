@@ -1,6 +1,6 @@
 {
   "name": "whatsapp-node-api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A NodeJS API wrapper for whatsapp-web.js",
   "main": "api.js",
   "scripts": {
