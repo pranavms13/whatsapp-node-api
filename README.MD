@@ -22,6 +22,8 @@
 
 -  [puppeteer](https://github.com/GoogleChrome/puppeteer)
 
+
+### [API Doc](https://github.com/pranavms13/whatsapp-node-api/blob/master/APIDOC.MD)
   
 
 ## [](https://github.com/pranavms13/whatsapp-node-api#why)Why?
