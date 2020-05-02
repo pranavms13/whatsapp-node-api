@@ -23,6 +23,15 @@
 ``GET : /chat/getchats``
 >Returns an Array of all Chats
 
+
+## Group Chat
+<u>Sending Messages to Group</u>
+``POST : /group/sendmessage/<Group_Name>``
+> Request Body
+> - message - contains the message to be sent
+<hr>
+
+
 ## Contact
 <u>Get Contacts</u>
 ``GET : /contact/getcontacts``
