@@ -13,6 +13,13 @@
 > - message - contains the message to be sent
 <hr>
 
+<u>Sending Images</u>
+``POST : /chat/sendimage/<phone_number>``
+> Request Body
+> - image - contains the base64 encoded image to be sent
+> - caption - (optional) - contains caption for the message
+<hr>
+
 <u>Get Chat By Id</u>
 ``GET : /chat/getchatbyid/<phone_number>``
 >Returns a Chat
@@ -29,6 +36,13 @@
 ``POST : /group/sendmessage/<Group_Name>``
 > Request Body
 > - message - contains the message to be sent
+<hr>
+
+<u>Sending Images</u>
+``POST : /group/sendimage/<Group_Name>``
+> Request Body
+> - image - contains the base64 encoded image to be sent
+> - caption - (optional) - contains caption for the message
 <hr>
 
 

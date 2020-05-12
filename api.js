@@ -57,12 +57,3 @@ app.use('/contact',contactRoute);
 app.listen(port, () => {
     console.log("Server Running Live on Port : " + port);
 });
-
-// client.on('message', msg => {
-//     // console.log(msg.id)
-//     client.getChats().then((data) => {
-//         // console.log(JSON.stringify(data))
-//         console.log(data.length)
-        
-//     });
-// });

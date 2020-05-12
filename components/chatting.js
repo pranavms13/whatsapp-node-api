@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { MessageMedia } = require("whatsapp-web.js");
 
 router.post('/sendmessage/:phone', async (req,res) => {
     let phone = req.params.phone;
@@ -9,7 +10,24 @@ router.post('/sendmessage/:phone', async (req,res) => {
     }else{
         client.sendMessage(phone+'@c.us',message).then((response)=>{
             if(response.id.fromMe){
-                res.send({status:'success',message:'Message successfully send to '+phone})
+                res.send({status:'success',message:'Message successfully sent to '+phone})
+            }
+        });
+    }
+});
+
+router.post('/sendimage/:phone', async (req,res) => {
+    let phone = req.params.phone;
+    let image = req.body.image;
+    let caption = req.body.caption;
+
+    if(phone==undefined||image==undefined){
+        res.send({status:"error",message:"please enter valid phone and base64 encoded image"})
+    }else{
+        let media = new MessageMedia('image/png',image);
+        client.sendMessage(phone+'@c.us',media,{caption:caption||""}).then((response)=>{
+            if(response.id.fromMe){
+                res.send({status:'success',message:'MediaMessage successfully sent to '+phone})
             }
         });
     }
