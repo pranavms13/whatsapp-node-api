@@ -23,7 +23,7 @@
 -  [puppeteer](https://github.com/GoogleChrome/puppeteer)
 
 
-### [API Doc](https://github.com/pranavms13/whatsapp-node-api/blob/master/APIDOC.MD)
+## [API Doc](https://github.com/pranavms13/whatsapp-node-api/blob/master/APIDOC.MD)
   
 
 ## [](https://github.com/pranavms13/whatsapp-node-api#why)Why?
@@ -108,7 +108,7 @@ You can support the maintainer of this project through donation :
 
   
 
-[![Support via PayPal](https://camo.githubusercontent.com/19fc947af2adcacd24b6cdbd4a33c10d7cbaeb6c/68747470733a2f2f63646e2e7261776769742e636f6d2f74776f6c66736f6e2f70617970616c2d6769746875622d627574746f6e2f312e302e302f646973742f627574746f6e2e737667)](https://www.paypal.me/pranavms1/) **or**  [UPI Donate](upi://pay?pa=pranavms@dbs&pn=pranavms)
+[![Support via PayPal](https://camo.githubusercontent.com/19fc947af2adcacd24b6cdbd4a33c10d7cbaeb6c/68747470733a2f2f63646e2e7261776769742e636f6d2f74776f6c66736f6e2f70617970616c2d6769746875622d627574746f6e2f312e302e302f646973742f627574746f6e2e737667)](https://www.paypal.me/pranavms1/) **or**  [UPI Donate](https://pranavms.ml/donate)
 
   
 
