@@ -20,6 +20,14 @@
 > - caption - (optional) - contains caption for the message
 <hr>
 
+<u>Sending Locations</u>
+``POST : /chat/sendlocation/<phone_number>``
+> Request Body
+> - latitude - contains the string of latitude
+> - longitude - contains the string of longitude
+> - description - (optional) - contains description for the location
+<hr>
+
 <u>Get Chat By Id</u>
 ``GET : /chat/getchatbyid/<phone_number>``
 >Returns a Chat
@@ -43,6 +51,14 @@
 > Request Body
 > - image - contains the base64 encoded image to be sent
 > - caption - (optional) - contains caption for the message
+<hr>
+
+<u>Sending Locations</u>
+``POST : /group/sendlocation/<Group_Name>``
+> Request Body
+> - latitude - contains the string of latitude
+> - longitude - contains the string of longitude
+> - description - (optional) - contains description for the location
 <hr>
 
 

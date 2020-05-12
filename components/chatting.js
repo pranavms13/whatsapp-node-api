@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { MessageMedia } = require("whatsapp-web.js");
+const { MessageMedia, Location } = require("whatsapp-web.js");
 
 router.post('/sendmessage/:phone', async (req,res) => {
     let phone = req.params.phone;
@@ -28,6 +28,24 @@ router.post('/sendimage/:phone', async (req,res) => {
         client.sendMessage(phone+'@c.us',media,{caption:caption||""}).then((response)=>{
             if(response.id.fromMe){
                 res.send({status:'success',message:'MediaMessage successfully sent to '+phone})
+            }
+        });
+    }
+});
+
+router.post('/sendlocation/:phone', async (req,res) => {
+    let phone = req.params.phone;
+    let latitude = req.body.latitude;
+    let longitude = req.body.longitude;
+    let desc = req.body.description;
+
+    if(phone==undefined||latitude==undefined||longitude==undefined){
+        res.send({status:"error",message:"please enter valid phone, latitude and longitude"})
+    }else{
+        let loc = new Location(latitude,longitude,desc||"");
+        client.sendMessage(phone+'@c.us',loc).then((response)=>{
+            if(response.id.fromMe){
+                res.send({status:'success',message:'Location successfully sent to '+phone})
             }
         });
     }
