@@ -4,6 +4,14 @@ const request = require('request')
 const vuri = require('valid-url');
 const fs = require('fs');
 
+const mediadownloader = (url, path, callback) => {
+    request.head(url, (err, res, body) => {
+      request(url)
+        .pipe(fs.createWriteStream(path))
+        .on('close', callback)
+    })
+  }
+  
 router.post('/sendmessage/:chatname', async (req,res) => {
     let chatname = req.params.chatname;
     let message = req.body.message;
