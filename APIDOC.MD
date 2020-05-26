@@ -16,7 +16,7 @@
 <u>Sending Images</u>
 ``POST : /chat/sendimage/<phone_number>``
 > Request Body
-> - image - contains the base64 encoded image to be sent
+> - image - contains the base64 encoded / URL of image to be sent
 > - caption - (optional) - contains caption for the message
 <hr>
 
@@ -49,7 +49,7 @@
 <u>Sending Images</u>
 ``POST : /group/sendimage/<Group_Name>``
 > Request Body
-> - image - contains the base64 encoded image to be sent
+> - image - contains the base64 encoded / URL of image to be sent
 > - caption - (optional) - contains caption for the message
 <hr>
 

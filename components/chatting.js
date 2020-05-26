@@ -1,5 +1,16 @@
 const router = require('express').Router();
 const { MessageMedia, Location } = require("whatsapp-web.js");
+const request = require('request')
+const vuri = require('valid-url');
+const fs = require('fs');
+
+const mediadownloader = (url, path, callback) => {
+    request.head(url, (err, res, body) => {
+      request(url)
+        .pipe(fs.createWriteStream(path))
+        .on('close', callback)
+    })
+  }
 
 router.post('/sendmessage/:phone', async (req,res) => {
     let phone = req.params.phone;
@@ -17,21 +28,41 @@ router.post('/sendmessage/:phone', async (req,res) => {
 });
 
 router.post('/sendimage/:phone', async (req,res) => {
+    var base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+
     let phone = req.params.phone;
     let image = req.body.image;
     let caption = req.body.caption;
 
     if(phone==undefined||image==undefined){
-        res.send({status:"error",message:"please enter valid phone and base64 encoded image"})
+        res.send({status:"error",message:"please enter valid phone and base64/url of image"})
     }else{
-        let media = new MessageMedia('image/png',image);
-        client.sendMessage(phone+'@c.us',media,{caption:caption||""}).then((response)=>{
-            if(response.id.fromMe){
-                res.send({status:'success',message:'MediaMessage successfully sent to '+phone})
+        if(base64regex.test(image)){
+            let media = new MessageMedia('image/png',image);
+            client.sendMessage(phone+'@c.us',media,{caption:caption||""}).then((response)=>{
+                if(response.id.fromMe){
+                    res.send({status:'success',message:'MediaMessage successfully sent to '+phone})
+                }
+            });
+        }else if(vuri.isWebUri(image)){
+            if (!fs.existsSync('./temp')){
+                await fs.mkdirSync('./temp');
             }
-        });
+            var path = './temp/' + image.split("/").slice(-1)[0]
+            mediadownloader(image,path,()=>{
+                let media = MessageMedia.fromFilePath(path);
+                client.sendMessage(phone+'@c.us',media,{caption:caption||""}).then((response)=>{
+                    if(response.id.fromMe){
+                        res.send({status:'success',message:'MediaMessage successfully sent to '+phone})
+                    }
+                });
+            })
+        }else{
+            res.send({status:'error',message:'Invalid URL/Base64 Encoded Media'})
+        }
     }
 });
+
 
 router.post('/sendlocation/:phone', async (req,res) => {
     let phone = req.params.phone;
