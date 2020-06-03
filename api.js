@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require('fs');
+const axios = require('axios')
+const config = require('./config.json');
 const { Client } = require('whatsapp-web.js');
 const SESSION_FILE_PATH = './session.json';
 let sessionCfg;
@@ -11,7 +13,7 @@ global.client = new Client({ puppeteer: { headless: true , args:['--no-sandbox',
 const app = express();
 
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || config.port;
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -38,6 +40,11 @@ client.on('ready', () => {
     console.log('Client is ready!');
 });
 
+client.on('message', msg => {
+    if(config.webhook.enabled){
+        axios.post(config.webhook.path, {msg : msg})
+    }
+})
 client.initialize();
 
 const chatRoute = require('./components/chatting');
