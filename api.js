@@ -1,7 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require('fs');
-const axios = require('axios')
+const axios = require('axios');
+const shelljs = require('shelljs');
+
 const config = require('./config.json');
 const { Client } = require('whatsapp-web.js');
 const SESSION_FILE_PATH = './session.json';
@@ -9,7 +11,9 @@ let sessionCfg;
 if (fs.existsSync(SESSION_FILE_PATH)) {
     sessionCfg = require(SESSION_FILE_PATH);
 }
+process.title = "whatsapp-node-api";
 global.client = new Client({ puppeteer: { headless: true , args:['--no-sandbox','--disable-setuid-sandbox','--unhandled-rejections=strict'] }, session: sessionCfg});
+global.authed = false;
 const app = express();
 
 
@@ -34,6 +38,12 @@ client.on('authenticated', (session) => {
     try{
         fs.unlinkSync('./components/last.qr')
     }catch(err){}
+});
+
+client.on('auth_failure', () => {
+    console.log("AUTH Failed !")
+    sessionCfg = ""
+    process.exit()
 });
 
 client.on('ready', () => {
