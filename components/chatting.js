@@ -54,6 +54,7 @@ router.post('/sendimage/:phone', async (req,res) => {
                 client.sendMessage(phone+'@c.us',media,{caption:caption||""}).then((response)=>{
                     if(response.id.fromMe){
                         res.send({status:'success',message:'MediaMessage successfully sent to '+phone})
+                        fs.unlinkSync(path)
                     }
                 });
             })
@@ -63,6 +64,41 @@ router.post('/sendimage/:phone', async (req,res) => {
     }
 });
 
+router.post('/sendpdf/:phone', async (req,res) => {
+    var base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+
+    let phone = req.params.phone;
+    let pdf = req.body.pdf;
+
+    if(phone==undefined||pdf==undefined){
+        res.send({status:"error",message:"please enter valid phone and base64/url of pdf"})
+    }else{
+        if(base64regex.test(pdf)){
+            let media = new MessageMedia('application/pdf',pdf);
+            client.sendMessage(phone+'@c.us',media).then((response)=>{
+                if(response.id.fromMe){
+                    res.send({status:'success',message:'MediaMessage successfully sent to '+phone})
+                }
+            });
+        }else if(vuri.isWebUri(pdf)){
+            if (!fs.existsSync('./temp')){
+                await fs.mkdirSync('./temp');
+            }
+            var path = './temp/' + pdf.split("/").slice(-1)[0]
+            mediadownloader(pdf,path,()=>{
+                let media = MessageMedia.fromFilePath(path);
+                client.sendMessage(phone+'@c.us',media).then((response)=>{
+                    if(response.id.fromMe){
+                        res.send({status:'success',message:'MediaMessage successfully sent to '+phone})
+                        fs.unlinkSync(path)
+                    }
+                });
+            })
+        }else{
+            res.send({status:'error',message:'Invalid URL/Base64 Encoded Media'})
+        }
+    }
+});
 
 router.post('/sendlocation/:phone', async (req,res) => {
     let phone = req.params.phone;

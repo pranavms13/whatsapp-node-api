@@ -20,6 +20,12 @@
 > - caption - (optional) - contains caption for the message
 <hr>
 
+<u>Sending PDF</u>
+``POST : /chat/sendpdf/<phone_number>``
+> Request Body
+> - pdf - contains the base64 encoded / URL of pdf to be sent
+<hr>
+
 <u>Sending Locations</u>
 ``POST : /chat/sendlocation/<phone_number>``
 > Request Body
@@ -51,6 +57,12 @@
 > Request Body
 > - image - contains the base64 encoded / URL of image to be sent
 > - caption - (optional) - contains caption for the message
+<hr>
+
+<u>Sending PDF</u>
+``POST : /group/sendpdf/<Group_Name>``
+> Request Body
+> - pdf - contains the base64 encoded / URL of pdf to be sent
 <hr>
 
 <u>Sending Locations</u>

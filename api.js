@@ -16,8 +16,10 @@ global.client = new Client({ puppeteer: { headless: true , args:['--no-sandbox',
 global.authed = false;
 const app = express();
 
-
 const port = process.env.PORT || config.port;
+//Set Request Size Limit 50 MB
+app.use(bodyParser.json({limit: '50mb'}));
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
