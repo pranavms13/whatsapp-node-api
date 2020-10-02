@@ -95,7 +95,7 @@ router.post('/sendpdf/:chatname', async (req,res) => {
     }else{
         if(base64regex.test(pdf)){
             client.getChats().then((data) => {
-                data.forEach(chat => {
+                data.some(chat => {
                     if(chat.id.server==="g.us" && chat.name===chatname){
                         if (!fs.existsSync('./temp')){
                             fs.mkdirSync('./temp');
@@ -107,14 +107,14 @@ router.post('/sendpdf/:chatname', async (req,res) => {
                                 fs.unlinkSync(path)
                             }
                         });
-                        break;
+                        return true;
                     }
                 });     
             });
         }else if(vuri.isWebUri(pdf)){
             var path = './temp/' + pdf.split("/").slice(-1)[0]
             client.getChats().then((data) => {
-                data.forEach(chat => {
+                data.some(chat => {
                     if(chat.id.server==="g.us" && chat.name===chatname){
                         mediadownloader(image,path,()=>{
                             let media = MessageMedia.fromFilePath(path);
@@ -125,7 +125,7 @@ router.post('/sendpdf/:chatname', async (req,res) => {
                                 }
                             });
                         });
-                        break;
+                        return true;
                     }
                 });     
             });            
@@ -145,7 +145,7 @@ router.post('/sendlocation/:chatname', async (req,res) => {
         res.send({status:"error",message:"please enter valid phone, latitude and longitude"})
     }else{
         client.getChats().then((data) => {
-            data.forEach(chat => {
+            data.some(chat => {
                 if(chat.id.server==="g.us" && chat.name===chatname){
                     let loc = new Location(latitude,longitude,desc||"");
                     client.sendMessage(chat.id._serialized,loc).then((response)=>{
@@ -153,7 +153,7 @@ router.post('/sendlocation/:chatname', async (req,res) => {
                             res.send({status:'success',message:'Message successfully send to '+chatname})
                         }
                     });
-                    break;
+                    return true;
                 }
             });     
         });
