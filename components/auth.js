@@ -6,23 +6,26 @@ router.get('/checkauth', async (req, res) => {
         console.log(data)
         res.send(data)
     }).catch((err) => {
-        if(err){
+        if (err) {
             res.send("DISCONNECTED")
-            try{
+            try {
                 fs.unlinkSync('../session.json')
-            }catch(err){console.log(err)}
+            } catch(err) {
+                console.log(err)
+            }
         }
     })
 });
 
 router.get('/getqr', (req,res) => {
     var qrjs = fs.readFileSync('components/qrcode.js');
+
     fs.readFile('components/last.qr', (err,last_qr) => {
         fs.readFile('session.json', (serr, sessiondata) => {
-            if(err && sessiondata){
+            if (err && sessiondata) {
                 res.write("<html><body><h2>Already Authenticated</h2></body></html>");
                 res.end();
-            }else if(!err && serr){
+            } else if (!err && serr) {
                 var page = `
                     <html>
                         <body>
@@ -38,11 +41,7 @@ router.get('/getqr', (req,res) => {
                 res.end();
             }
         })
-        if(err){
-            
-        }else{
-            
-        }
     });
 });
+
 module.exports = router;
