@@ -67,8 +67,12 @@ client.on('ready', () => {
     console.log('Client is ready!');
 });
 
-client.on('message', msg => {
+client.on('message', async msg => {
     if (config.webhook.enabled) {
+        if (msg.hasMedia) {
+            const attachmentData = await msg.downloadMedia()
+            msg.attachmentData = attachmentData
+        }
         axios.post(config.webhook.path, { msg })
     }
 })
