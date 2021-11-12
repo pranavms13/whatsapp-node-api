@@ -6,7 +6,7 @@ const shelljs = require('shelljs');
 
 const config = require('./config.json');
 const { Client } = require('whatsapp-web.js');
-const SESSION_FILE_PATH = './session.json';
+const SESSION_FILE_PATH = process.env.SESSION_FILE_PATH || './session.json';
 
 let sessionCfg;
 if (fs.existsSync(SESSION_FILE_PATH)) {
