@@ -18,8 +18,6 @@ router.get('/checkauth', async (req, res) => {
 });
 
 router.get('/getqr', (req,res) => {
-    var qrjs = fs.readFileSync('components/qrcode.js');
-
     fs.readFile('components/last.qr', (err,last_qr) => {
         fs.readFile('session.json', (serr, sessiondata) => {
             if (err && sessiondata) {
@@ -29,10 +27,20 @@ router.get('/getqr', (req,res) => {
                 var page = `
                     <html>
                         <body>
-                            <script>${qrjs}</script>
+                            <script type="module">
+                            </script>
                             <div id="qrcode"></div>
-                            <script type="text/javascript">
-                                new QRCode(document.getElementById("qrcode"), "${last_qr}");
+                            <script type="module">
+                            import QrCreator from "https://cdn.jsdelivr.net/npm/qr-creator/dist/qr-creator.es6.min.js";
+                            let container = document.getElementById("qrcode");
+                            QrCreator.render({
+                                text: "${last_qr}",
+                                radius: 0.5, // 0.0 to 0.5
+                                ecLevel: "H", // L, M, Q, H
+                                fill: "#536DFE", // foreground color
+                                background: null, // color or null for transparent
+                                size: 256, // in pixels
+                            }, container);
                             </script>
                         </body>
                     </html>
