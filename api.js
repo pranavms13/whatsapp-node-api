@@ -43,14 +43,18 @@ client.on('qr', qr => {
 
 client.on('authenticated', (session) => {
     console.log("AUTH!");
-    sessionCfg = session;
+    if (session) {
+        sessionCfg = session;
 
-    fs.writeFile(SESSION_FILE_PATH, JSON.stringify(session), function (err) {
-        if (err) {
-            console.error(err);
-        }
+        fs.writeFile(SESSION_FILE_PATH, JSON.stringify(session), function (err) {
+            if (err) {
+                console.error(err);
+            }
+            authed = true;
+        });
+    } else {
         authed = true;
-    });
+    }
 
     try {
         fs.unlinkSync('./components/last.qr')
