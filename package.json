@@ -32,6 +32,6 @@
     "request": "^2.88.2",
     "shelljs": "^0.8.4",
     "valid-url": "^1.0.9",
-    "whatsapp-web.js": "git@github.com:pedroslopez/whatsapp-web.js.git#multidevice"
+    "whatsapp-web.js": "github:pedroslopez/whatsapp-web.js#multidevice"
   }
 }
