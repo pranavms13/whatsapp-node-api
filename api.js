@@ -37,6 +37,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 client.on('qr', qr => {
+    console.log("qr");
     fs.writeFileSync('./components/last.qr', qr);
 });
 
@@ -80,6 +81,9 @@ client.on('message', async msg => {
         axios.post(config.webhook.path, { msg })
     }
 })
+client.on('disconnected', () => {
+    console.log("disconnected");
+});
 client.initialize();
 
 const chatRoute = require('./components/chatting');
