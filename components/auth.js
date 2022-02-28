@@ -1,30 +1,36 @@
-const router = require('express').Router();
-const fs = require('fs');
+const router = require("express").Router();
+const fs = require("fs");
 
-router.get('/checkauth', async (req, res) => {
-    client.getState().then((data) => {
-        console.log(data)
-        res.send(data)
-    }).catch((err) => {
-        if (err) {
-            res.send("DISCONNECTED")
-            try {
-                fs.unlinkSync('../session.json')
-            } catch(err) {
-                console.log(err)
-            }
-        }
+router.get("/checkauth", async (req, res) => {
+  client
+    .getState()
+    .then((data) => {
+      console.log(data);
+      res.send(data);
     })
+    .catch((err) => {
+      if (err) {
+        res.send("DISCONNECTED");
+      }
+    });
 });
 
-router.get('/getqr', async (req,res) => {
-    client.getState().then((data) => {
+router.get("/getqr", async (req, res) => {
+  client
+    .getState()
+    .then((data) => {
+      if (data) {
         res.write("<html><body><h2>Already Authenticated</h2></body></html>");
         res.end();
-    }).catch((err) => {
-        fs.readFile('components/last.qr', (err,last_qr) => {
-            if (!err && last_qr) {
-                var page = `
+      } else sendQr(res);
+    })
+    .catch(() => sendQr(res));
+});
+
+function sendQr(res) {
+  fs.readFile("components/last.qr", (err, last_qr) => {
+    if (!err && last_qr) {
+      var page = `
                     <html>
                         <body>
                             <script type="module">
@@ -44,12 +50,11 @@ router.get('/getqr', async (req,res) => {
                             </script>
                         </body>
                     </html>
-                `
-                res.write(page)
-                res.end();
-            }
-        });
-    })
-});
+                `;
+      res.write(page);
+      res.end();
+    }
+  });
+}
 
 module.exports = router;
