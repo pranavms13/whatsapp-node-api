@@ -55,7 +55,12 @@ router.post('/sendimage/:phone', async (req,res) => {
                 
                 client.sendMessage(`${phone}@c.us`, media, { caption: caption || '' }).then((response) => {
                     if (response.id.fromMe) {
-                        res.send({ status: 'success', message: `MediaMessage successfully sent to ${phone}` })
+                        res.send({
+                          data: {
+                            status: "success",
+                            message: `MediaMessage successfully sent to ${phone}`,
+                          },
+                        });
                         fs.unlinkSync(path)
                     }
                 });
