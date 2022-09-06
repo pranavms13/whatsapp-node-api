@@ -3,6 +3,7 @@ const { MessageMedia, Location } = require("whatsapp-web.js");
 const request = require('request')
 const vuri = require('valid-url');
 const fs = require('fs');
+const config = require("./../config.json");
 
 const mediadownloader = (url, path, callback) => {
     request.head(url, (err, res, body) => {
@@ -11,6 +12,9 @@ const mediadownloader = (url, path, callback) => {
         .on('close', callback)
     })
   }
+
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
 
 router.post('/sendmessage/:phone', async (req,res) => {
     let phone = req.params.phone;
@@ -23,6 +27,17 @@ router.post('/sendmessage/:phone', async (req,res) => {
             if (response.id.fromMe) {
                 res.send({ status:'success', message: `Message successfully sent to ${phone}` })
             }
+        });
+
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("whatsappdb");
+            var msgobj = {number: phone, message: message, date: formatDate(new Date()), app: config.port };
+            dbo.collection("messages").insertOne(msgobj, function(err, res) {
+                if (err) throw err;
+                console.log("1 document inserted");
+                db.close();
+            });
         });
     }
 });
@@ -142,5 +157,26 @@ router.get('/getchats', async (req, res) => {
         res.send({ status: "error",message: "getchatserror" })
     })
 });
+
+
+function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+}
+  
+function formatDate(date) {
+    return (
+    [
+        date.getFullYear(),
+        padTo2Digits(date.getMonth() + 1),
+        padTo2Digits(date.getDate()),
+    ].join('-') +
+    ' ' +
+    [
+        padTo2Digits(date.getHours()),
+        padTo2Digits(date.getMinutes()),
+        padTo2Digits(date.getSeconds()),
+    ].join(':')
+    );
+}
 
 module.exports = router;
