@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/pranavms13/whatsapp-node-api#readme",
   "dependencies": {
-    "axios": "^0.21.4",
+    "axios": "^1.6.0",
     "body-parser": "^1.19.2",
     "child_process": "^1.0.2",
     "express": "^4.17.3",
